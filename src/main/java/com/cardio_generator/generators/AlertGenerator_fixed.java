@@ -1,4 +1,4 @@
-package com.cardio_generator.generators;
+package main.java.com.cardio_generator.generators;
 
 import java.util.Random;
 

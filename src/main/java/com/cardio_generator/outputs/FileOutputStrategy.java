@@ -7,35 +7,46 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class fileOutputStrategy implements OutputStrategy {
+// Renamed the class to follow CamelCase style convention and renamed to FileOutputStrategy
+public class FileOutputStrategy implements OutputStrategy {
 
-    private String BaseDirectory;
+    // Renamed the variable to follow camelCase style convention and renamed to baseDirectory
+    private String baseDirectory;
 
-    public final ConcurrentHashMap<String, String> file_map = new ConcurrentHashMap<>();
+    // Used final modifier to declare the constant fileMap
+    public final ConcurrentHashMap<String, String> fileMap = new ConcurrentHashMap<>();
 
-    public fileOutputStrategy(String baseDirectory) {
+    // Added a default constructor for the class
+    public FileOutputStrategy() {}
 
-        this.BaseDirectory = baseDirectory;
+    // Renamed the parameter to follow camelCase style convention and renamed to baseDirectory
+    public FileOutputStrategy(String baseDirectory) {
+        this.baseDirectory = baseDirectory;
     }
 
+    // Added an @Override annotation
     @Override
     public void output(int patientId, long timestamp, String label, String data) {
         try {
-            // Create the directory
-            Files.createDirectories(Paths.get(BaseDirectory));
+            // Used the resolve method to build the base path
+            Files.createDirectories(Paths.get(baseDirectory));
         } catch (IOException e) {
+            // Used System.err to print the error to the standard error console
             System.err.println("Error creating base directory: " + e.getMessage());
             return;
         }
-        // Set the FilePath variable
-        String FilePath = file_map.computeIfAbsent(label, k -> Paths.get(BaseDirectory, label + ".txt").toString());
 
-        // Write the data to the file
+        // Used the computeIfAbsent method to get the file path
+        String filePath = fileMap.computeIfAbsent(label, k -> Paths.get(baseDirectory, label + ".txt").toString());
+
         try (PrintWriter out = new PrintWriter(
-                Files.newBufferedWriter(Paths.get(FilePath), StandardOpenOption.CREATE, StandardOpenOption.APPEND))) {
+                // Used the newBufferedWriter method to get a buffered writer
+                Files.newBufferedWriter(Paths.get(filePath), StandardOpenOption.CREATE, StandardOpenOption.APPEND))) {
+            // Used the printf method to format the output string
             out.printf("Patient ID: %d, Timestamp: %d, Label: %s, Data: %s%n", patientId, timestamp, label, data);
-        } catch (Exception e) {
-            System.err.println("Error writing to file " + FilePath + ": " + e.getMessage());
+        } catch (IOException e) {
+            // Used System.err to print the error to the standard error console
+            System.err.println("Error writing to file " + filePath + ": " + e.getMessage());
         }
     }
 }
