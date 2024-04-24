@@ -67,3 +67,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ##Project Member
 
 -Student ID: 6346976
+
+## Link for the UML diagrams
+
+We have included a series of UML diagrams that illustrate the system's design. These diagrams provide a visual overview of the main classes of the system, use cases, and the relationships between stakeholders and use cases. To see the diagrams see the link: https://github.com/ceci2105/signal_project/tree/master/uml_models
