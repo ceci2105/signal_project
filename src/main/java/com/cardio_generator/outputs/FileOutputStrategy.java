@@ -14,7 +14,6 @@ import java.util.concurrent.ConcurrentHashMap;
 public class FileOutputStrategy implements OutputStrategy {
 
     private String baseDirectory;
-    // Used final modifier to declare the constant fileMap
     public final ConcurrentHashMap<String, String> fileMap = new ConcurrentHashMap<>();
 
     /**
@@ -38,24 +37,18 @@ public class FileOutputStrategy implements OutputStrategy {
     @Override
     public void output(int patientId, long timestamp, String label, String data) {
         try {
-            // Creates the base directory if it doesn't exist
             Files.createDirectories(Paths.get(baseDirectory));
         } catch (IOException e) {
-            // Prints the error to the standard error console
             System.err.println("Error creating base directory: " + e.getMessage());
             return;
         }
 
-        // Computes the file path based on the label
         String filePath = fileMap.computeIfAbsent(label, k -> Paths.get(baseDirectory, label + ".txt").toString());
 
         try (PrintWriter out = new PrintWriter(
-                // Opens a buffered writer for appending to the file
                 Files.newBufferedWriter(Paths.get(filePath), StandardOpenOption.CREATE, StandardOpenOption.APPEND))) {
-            // Writes the formatted output string to the file
             out.printf("Patient ID: %d, Timestamp: %d, Label: %s, Data: %s%n", patientId, timestamp, label, data);
         } catch (IOException e) {
-            // Prints the error to the standard error console
             System.err.println("Error writing to file " + filePath + ": " + e.getMessage());
         }
     }

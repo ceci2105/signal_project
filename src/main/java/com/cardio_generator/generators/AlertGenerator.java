@@ -28,34 +28,26 @@ public class AlertGenerator implements PatientDataGenerator {
 
     /**
      * Generates alerts for the specified patient ID and outputs them using the provided output strategy.
-     *
+     * 
      * @param patientId      The ID of the patient for whom alerts are generated.
      * @param outputStrategy The strategy for outputting the generated alerts.
      */
     @Override
     public void generate(int patientId, OutputStrategy outputStrategy) {
+        
         try {
-            // Variable name follows camelCase convention
             if (alertStates[patientId]) {
-                // Variable name follows camelCase convention
-                if (randomGenerator.nextDouble() < 0.9) { // 90% chance to resolve
-                    // Variable name follows camelCase convention
+                if (randomGenerator.nextDouble() < 0.9) {
                     alertStates[patientId] = false;
-                    // Output the resolved alert
                     outputStrategy.output(patientId, System.currentTimeMillis(), "Alert", "resolved");
                 }
             } else {
-                // Variable name follows camelCase convention
-                double lambda = 0.1; // Average rate (alerts per period), adjust based on desired frequency
-                // Variable name follows camelCase convention
-                double p = -Math.expm1(-lambda); // Probability of at least one alert in the period
-                // Variable name follows camelCase convention
+                double lambda = 0.1;
+                double p = -Math.expm1(-lambda);
                 boolean alertTriggered = randomGenerator.nextDouble() < p;
 
                 if (alertTriggered) {
-                    // Variable name follows camelCase convention
                     alertStates[patientId] = true;
-                    // Output the triggered alert
                     outputStrategy.output(patientId, System.currentTimeMillis(), "Alert", "triggered");
                 }
             }

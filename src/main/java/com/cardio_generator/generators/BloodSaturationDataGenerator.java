@@ -21,9 +21,9 @@ public class BloodSaturationDataGenerator implements PatientDataGenerator {
     public BloodSaturationDataGenerator(int patientCount) {
         lastSaturationValues = new int[patientCount + 1];
 
-        // Initialize with base saturation values for each patient
+        
         for (int i = 1; i <= patientCount; i++) {
-            lastSaturationValues[i] = 95 + random.nextInt(6); // Initializes with a value between 95 and 100
+            lastSaturationValues[i] = 95 + random.nextInt(6); 
         }
     }
 
@@ -47,7 +47,7 @@ public class BloodSaturationDataGenerator implements PatientDataGenerator {
                     Double.toString(newSaturationValue) + "%");
         } catch (Exception e) {
             System.err.println("An error occurred while generating blood saturation data for patient " + patientId);
-            e.printStackTrace(); // This will print the stack trace to help identify where the error occurred.
+            e.printStackTrace(); 
         }
     }
 }
