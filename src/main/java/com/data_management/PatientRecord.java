@@ -68,3 +68,4 @@ public class PatientRecord {
         return recordType;
     }
 }
+
