@@ -37,6 +37,25 @@ public class HealthDataSimulator {
     // Default output strategy
     private static OutputStrategy outputStrategy = new ConsoleOutputStrategy(); 
     private static final Random random = new Random();
+    private static HealthDataSimulator instance; 
+    private static final Object lock = new Object();
+    
+
+    /**
+     * Provides access to the single instance of HealthDataSimulator.
+     *
+     * @return the single instance of HealthDataSimulator
+     */
+    public static HealthDataSimulator getInstance() {
+        if (instance == null) {
+            synchronized (lock) {
+                if (instance == null) {
+                    instance = new HealthDataSimulator();
+                }
+            }
+        }
+        return instance;
+    }
 
     /**
      * Main method to start the health data simulation.

@@ -16,14 +16,36 @@ import com.cardio_generator.outputs.WebSocketDataReader;
  * This class serves as a repository for all patient records, organized by patient IDs.
  */
 public class DataStorage {
+    private static DataStorage instance; // Single instance of DataStorage
+    private static final Lock instanceLock = new ReentrantLock(); // Lock for thread-safe singleton initialization
+
     private Map<Integer, Patient> patientMap; // Stores patient objects indexed by their unique patient ID.
-    private final Lock lock = new ReentrantLock();
+    private final Lock dataLock = new ReentrantLock(); // Lock for thread-safe data operations
 
     /**
-     * Constructs a new instance of DataStorage, initializing the underlying storage structure.
+     * Private constructor to prevent instantiation from outside.
      */
-    public DataStorage() {
+    private DataStorage() {
         this.patientMap = new HashMap<>();
+    }
+
+    /**
+     * Provides access to the single instance of DataStorage.
+     *
+     * @return the single instance of DataStorage
+     */
+    public static DataStorage getInstance() {
+        if (instance == null) {
+            instanceLock.lock();
+            try {
+                if (instance == null) {
+                    instance = new DataStorage();
+                }
+            } finally {
+                instanceLock.unlock();
+            }
+        }
+        return instance;
     }
 
     /**
@@ -37,7 +59,7 @@ public class DataStorage {
      * @param timestamp        the time at which the measurement was taken, in milliseconds since the Unix epoch
      */
     public void addPatientData(int patientId, double measurementValue, String recordType, long timestamp) {
-        lock.lock();
+        dataLock.lock();
         try {
             Patient patient = patientMap.get(patientId);
             if (patient == null) {
@@ -47,7 +69,7 @@ public class DataStorage {
             // Check if the record already exists and update it if needed
             patient.addOrUpdateRecord(measurementValue, recordType, timestamp);
         } finally {
-            lock.unlock();
+            dataLock.unlock();
         }
     }
 
@@ -84,7 +106,7 @@ public class DataStorage {
      */
     public static void main(String[] args) {
         try {
-            DataStorage storage = new DataStorage();
+            DataStorage storage = DataStorage.getInstance();
             WebSocketDataReader dataReader = new WebSocketDataReader("ws://localhost:8080/data");
 
             dataReader.readData(storage);
@@ -106,3 +128,4 @@ public class DataStorage {
         }
     }
 }
+
