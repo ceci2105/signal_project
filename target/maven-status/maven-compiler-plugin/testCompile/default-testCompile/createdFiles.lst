@@ -1,0 +1,10 @@
+data_management\AlertStrategyTest.class
+data_management\WebSocketDataReaderTest$WebSocketServerMock.class
+data_management\WebSocketDataReaderTest.class
+data_management\DataStorageTest.class
+data_management\SingletonTest.class
+data_management\AlertFactoryTest.class
+data_management\PatientTest.class
+data_management\DataReaderTest.class
+data_management\AlertGeneratorTest.class
+data_management\AlertDecoratorTest.class
