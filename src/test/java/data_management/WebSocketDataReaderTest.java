@@ -5,13 +5,11 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import org.java_websocket.WebSocket;
-import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.handshake.ServerHandshake;
 import org.junit.After;
@@ -32,8 +30,8 @@ public class WebSocketDataReaderTest {
 
     @Before
     public void setUp() throws URISyntaxException {
-        dataStorage = new DataStorage();
-        webSocketDataReader = new WebSocketDataReader(new URI("ws://localhost:8080/data"));
+        webSocketDataReader = new WebSocketDataReader("ws://localhost:8080/data");
+        dataStorage = new DataStorage(webSocketDataReader);
         latch = new CountDownLatch(1);
     }
 
@@ -85,30 +83,34 @@ public class WebSocketDataReaderTest {
         }
 
         @Override
-        public void onOpen(org.java_websocket.WebSocket conn, ServerHandshake handshake) {
-            System.out.println("Opened connection: " + conn.getRemoteSocketAddress());
-        }
-
-        @Override
-        public void onClose(org.java_websocket.WebSocket conn, int code, String reason, boolean remote) {
+        public void onClose(WebSocket conn, int code, String reason, boolean remote) {
             System.out.println("Closed connection: " + conn.getRemoteSocketAddress());
         }
 
         @Override
-        public void onMessage(org.java_websocket.WebSocket conn, String message) {
+        public void onMessage(WebSocket conn, String message) {
             System.out.println("Received message: " + message);
             // Notify the test thread
             latch.countDown();
         }
 
         @Override
-        public void onError(org.java_websocket.WebSocket conn, Exception ex) {
+        public void onError(WebSocket conn, Exception ex) {
             ex.printStackTrace();
         }
 
         @Override
         public void onStart() {
             System.out.println("WebSocket server started");
+        }
+        
+        public void sendData(String data) {
+            broadcast(data);
+        }
+
+        @Override
+        public void onOpen(WebSocket conn, ClientHandshake handshake) {
+            System.out.println("Opened connection: " + conn.getRemoteSocketAddress());
         }
     }
 }

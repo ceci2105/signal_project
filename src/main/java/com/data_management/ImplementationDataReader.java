@@ -53,4 +53,10 @@ public class ImplementationDataReader implements DataReader {
             }
         }
     }
+
+    @Override
+    public void stopReading() throws IOException {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'stopReading'");
+    }
 }

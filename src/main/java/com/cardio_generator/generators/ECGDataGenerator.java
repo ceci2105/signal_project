@@ -3,6 +3,7 @@ package com.cardio_generator.generators;
 import java.util.Random;
 
 import com.cardio_generator.outputs.OutputStrategy;
+import com.data_management.Patient;
 
 public class ECGDataGenerator implements PatientDataGenerator {
     private static final Random random = new Random();
@@ -42,5 +43,41 @@ public class ECGDataGenerator implements PatientDataGenerator {
         double tWave = 0.2 * Math.sin(2 * PI * 2 * ecgFrequency * t + PI / 4); // T wave is offset
 
         return pWave + qrsComplex + tWave + random.nextDouble() * 0.05; // Add small noise
+    }
+
+    @Override
+    public void bloodPressureAlert(int patientId, OutputStrategy outputStrategy) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'bloodPressureAlert'");
+    }
+
+    @Override
+    public void bloodSaturationAlert(int patientId, OutputStrategy outputStrategy) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'bloodSaturationAlert'");
+    }
+
+    @Override
+    public void hypotensiveHypoxemiaAlert(int patientId, OutputStrategy outputStrategy) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'hypotensiveHypoxemiaAlert'");
+    }
+
+    @Override
+    public void ECGalert(int patientId, OutputStrategy outputStrategy) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'ECGalert'");
+    }
+
+    @Override
+    public void triggerAlert(int patientId, OutputStrategy outputStrategy) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'triggerAlert'");
+    }
+
+    @Override
+    public void evaluateData(Patient patient) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'evaluateData'");
     }
 }

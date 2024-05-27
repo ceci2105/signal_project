@@ -24,8 +24,9 @@ public class DataStorage {
 
     /**
      * Private constructor to prevent instantiation from outside.
+     * @param reader 
      */
-    private DataStorage() {
+    public DataStorage(DataReader reader) {
         this.patientMap = new HashMap<>();
     }
 
@@ -39,7 +40,7 @@ public class DataStorage {
             instanceLock.lock();
             try {
                 if (instance == null) {
-                    instance = new DataStorage();
+                    instance = new DataStorage(null);
                 }
             } finally {
                 instanceLock.unlock();

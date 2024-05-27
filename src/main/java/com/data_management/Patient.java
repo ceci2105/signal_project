@@ -13,7 +13,7 @@ public class Patient {
     }
 
     public void addRecord(double measurementValue, String recordType, long timestamp) {
-        records.add(new PatientRecord(recordType, measurementValue, timestamp));
+        records.add(new PatientRecord(patientId, recordType, measurementValue, timestamp));
     }
 
     public void addOrUpdateRecord(double measurementValue, String recordType, long timestamp) {
@@ -42,4 +42,3 @@ public class Patient {
         return patientId;
     }
 }
-

@@ -3,6 +3,7 @@ package com.cardio_generator.generators;
 import java.util.Random;
 
 import com.cardio_generator.outputs.OutputStrategy;
+import com.data_management.Patient;
 
 public class BloodLevelsDataGenerator implements PatientDataGenerator {
     private static final Random random = new Random();
@@ -41,5 +42,41 @@ public class BloodLevelsDataGenerator implements PatientDataGenerator {
             System.err.println("An error occurred while generating blood levels data for patient " + patientId);
             e.printStackTrace(); // This will print the stack trace to help identify where the error occurred.
         }
+    }
+
+    @Override
+    public void bloodPressureAlert(int patientId, OutputStrategy outputStrategy) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'bloodPressureAlert'");
+    }
+
+    @Override
+    public void bloodSaturationAlert(int patientId, OutputStrategy outputStrategy) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'bloodSaturationAlert'");
+    }
+
+    @Override
+    public void hypotensiveHypoxemiaAlert(int patientId, OutputStrategy outputStrategy) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'hypotensiveHypoxemiaAlert'");
+    }
+
+    @Override
+    public void ECGalert(int patientId, OutputStrategy outputStrategy) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'ECGalert'");
+    }
+
+    @Override
+    public void triggerAlert(int patientId, OutputStrategy outputStrategy) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'triggerAlert'");
+    }
+
+    @Override
+    public void evaluateData(Patient patient) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'evaluateData'");
     }
 }

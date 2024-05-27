@@ -1,5 +1,6 @@
 package com.alerts;
 
+import com.cardio_generator.outputs.OutputStrategy;
 import com.data_management.DataStorage;
 import com.data_management.Patient;
 
@@ -48,5 +49,10 @@ public class AlertGenerator {
      */
     private void triggerAlert(Alert alert) {
         // Implementation might involve logging the alert or notifying staff
+    }
+
+    public void bloodPressureAlert(int i, OutputStrategy outputStrategy) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'bloodPressureAlert'");
     }
 }

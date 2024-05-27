@@ -1,18 +1,14 @@
 package com.cardio_generator.generators;
 
 import com.cardio_generator.outputs.OutputStrategy;
+import com.data_management.Patient;
 
-/**
- * Interface for generating patient data.
- * Implementing classes are in control for generating specific types of patient data.
- */
 public interface PatientDataGenerator {
-    
-    /**
-     * Generates patient data for the specified patient ID and outputs it using the provided output strategy.
-     * 
-     * @param patientId The ID of the patient for whom data is generated.
-     * @param outputStrategy The strategy for outputting the generated data.
-     */
     void generate(int patientId, OutputStrategy outputStrategy);
+    void bloodPressureAlert(int patientId, OutputStrategy outputStrategy);
+    void bloodSaturationAlert(int patientId, OutputStrategy outputStrategy);
+    void hypotensiveHypoxemiaAlert(int patientId, OutputStrategy outputStrategy);
+    void ECGalert(int patientId, OutputStrategy outputStrategy);
+    void triggerAlert(int patientId, OutputStrategy outputStrategy);
+    void evaluateData(Patient patient);
 }

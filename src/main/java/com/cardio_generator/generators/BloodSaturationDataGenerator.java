@@ -3,6 +3,7 @@ package com.cardio_generator.generators;
 import java.util.Random;
 
 import com.cardio_generator.outputs.OutputStrategy;
+import com.data_management.Patient;
 
 /**
  * Generates simulated blood saturation data for patients.
@@ -49,5 +50,41 @@ public class BloodSaturationDataGenerator implements PatientDataGenerator {
             System.err.println("An error occurred while generating blood saturation data for patient " + patientId);
             e.printStackTrace(); 
         }
+    }
+
+    @Override
+    public void bloodPressureAlert(int patientId, OutputStrategy outputStrategy) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'bloodPressureAlert'");
+    }
+
+    @Override
+    public void bloodSaturationAlert(int patientId, OutputStrategy outputStrategy) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'bloodSaturationAlert'");
+    }
+
+    @Override
+    public void hypotensiveHypoxemiaAlert(int patientId, OutputStrategy outputStrategy) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'hypotensiveHypoxemiaAlert'");
+    }
+
+    @Override
+    public void ECGalert(int patientId, OutputStrategy outputStrategy) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'ECGalert'");
+    }
+
+    @Override
+    public void triggerAlert(int patientId, OutputStrategy outputStrategy) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'triggerAlert'");
+    }
+
+    @Override
+    public void evaluateData(Patient patient) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'evaluateData'");
     }
 }
