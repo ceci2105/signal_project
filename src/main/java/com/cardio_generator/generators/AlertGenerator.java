@@ -10,6 +10,10 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Random;
 
+/**
+ * The {@code AlertGenerator} class generates and evaluates patient data to trigger alerts based on specific conditions.
+ */
+
 public class AlertGenerator implements PatientDataGenerator {
 
     public static final Random randomGenerator = new Random();
